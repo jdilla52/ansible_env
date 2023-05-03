@@ -1,0 +1,56 @@
+- name: Install nvm
+  become: no
+  ansible.builtin.shell: >
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.39.1/install.sh | bash
+  args:
+    executable: /bin/bash
+    chdir: "$HOME"
+    creates: "$HOME/.nvm/nvm.sh"
+
+# - name: Activate nvm
+#   become: no
+#   shell: >
+#     . {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm on
+#   args: 
+#     executable: /bin/bash
+
+- name: Install node
+  become: no
+  shell: >
+    . {{ ansible_env.HOME }}/.nvm/nvm.sh && source ~/.bashrc && nvm install {{ nodejs_version }}
+  args:
+    executable: /bin/bash
+    chdir: "{{ ansible_env.HOME }}"
+    creates: "{{ ansible_env.HOME }}/.nvm/versions/{{ nodejs_version }}"
+
+# - name: Install nvm
+#   become: true
+#   shell: curl https://raw.githubusercontent.com/creationix/nvm/v0.20.0/install.sh | bash 
+#   tags:
+#     - install
+#     - node
+
+# - name: npmjs prefix
+#   shell: source ~/.bashrc
+#   tags:
+#   - install
+#   - node
+
+# - name: add npmjs to path
+#   shell: nvm install node
+#   tags:
+#   - install
+#   - node
+
+# - name: npmjs global settings
+#   shell: npm config set prefix '~/.local/.npm-global'
+#   tags:
+#   - install
+#   - node
+
+# - name: npmjs global settings export path in case I don't have dotfiles installed
+#   shell: export PATH=~/.local/.npm-global/bin:$PATH
+#   tags:
+#   - install
+#   - node
+#   - npm-path

@@ -1,0 +1,10 @@
+# - name: Oh-My-Zsh
+#   shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+#   tags: *tags_for_zsh_tasks
+#   when: oh_my_stats.stat.exists == False
+
+# - name: Install zsh-autosuggestions
+#   ansible.builtin.git:
+#     repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+#     dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"
+#   tags: *tags_for_zsh_tasks

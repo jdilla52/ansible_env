@@ -1,0 +1,2 @@
+- name: install nodeJs
+  homebrew: name=node state=installed 

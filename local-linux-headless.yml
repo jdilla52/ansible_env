@@ -1,0 +1,28 @@
+- hosts: localhost
+  vars:
+    nodejs_version: 14.20.0
+  # vars:
+    # source_key: "./.ssh/id_rsa"
+    # dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    # personal: "{{ lookup('env', 'HOME') }}/personal"
+  pre_tasks:
+  - name: Update Apt
+    become: true
+    apt:
+      force_apt_get: true
+      update_cache: true
+      state: present
+    tags:
+      - install
+      - core
+  tasks:
+    # - include_tasks: tasks/ssh.yml
+    - include_tasks: general/git-setup.yml
+    - include_tasks: linux-headless/core-setup.yml
+    - include_tasks: linux-headless/dotfiles.yml
+    - include_tasks: linux-headless/node-setup.yml
+    - include_tasks: linux-headless/nvim-setup.yml
+    - include_tasks: linux-headless/zsh-setup.yml
+    - include_tasks: general/npm-packages.yml
+    # - include_tasks: general/oh-my-zsh.yml
+    - include_tasks: general/rust.yml
