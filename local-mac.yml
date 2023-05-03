@@ -1,37 +1,31 @@
-- hosts: localhost
-  # vars:
-    # source_key: "./.ssh/id_rsa"
-    # dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
-    # personal: "{{ lookup('env', 'HOME') }}/personal"
-  pre_tasks:
-    - name: Ensuring Homebrew Is Installed
-      stat:
-        path: /usr/local/bin/brew
-      register: homebrew_check
+# - hosts: localhost
+# pre_tasks:
+#   - name: Ensuring Homebrew Is Installed
+#     stat:
+#       path: /usr/local/bin/brew
+#     register: homebrew_check
 
-    - name: Fail If Homebrew Is Not Installed and install_homebrew_if_missing Is False
-      fail:
-        msg: Homebrew is missing...Install from http://brew.sh/
-      when:
-        - not homebrew_check.stat.exists
-        - not install_homebrew_if_missing
+#   - name: Fail If Homebrew Is Not Installed and install_homebrew_if_missing Is False
+#     fail:
+#       msg: Homebrew is missing...Install from http://brew.sh/
+#     when:
+#       - not homebrew_check.stat.exists
+#       - not install_homebrew_if_missing
 
-    - name: Installing Homebrew
-      shell: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-      when:
-        - not homebrew_check.stat.exists
-        - install_homebrew_if_missing
-  tasks:
-    # - include: tasks/ssh.yml
-    - include: tasks/git-setup.yml
-    - include: tasks/core-setup.yml
-    - include: tasks/node-setup.yml
-    - include: tasks/npm-packages.yml
-    - include: tasks/rust.yml
-    - include: tasks/zsh-setup.yml
-    - include: tasks/slack-setup.yml
-    - include: tasks/nvim-setup.yml
-    - include: tasks/brave.yml
-    - include: tasks/debugger.yml
-    - include: tasks/dotfiles.yml
-    - include: tasks/productivity-tools.yml
+#   - name: Installing Homebrew
+#     shell: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#     when:
+#       - not homebrew_check.stat.exists
+#       - install_homebrew_if_missing
+# tasks:
+# - include: tasks/ssh.yml
+- include_tasks: mac/hombrew.yml
+- include_tasks: general/git-setup.yml
+# - include_tasks: linux-headless/core-setup.yml
+# - include_tasks: linux-headless/dotfiles.yml
+# - include_tasks: linux-headless/node-setup.yml
+# - include_tasks: linux-headless/nvim-setup.yml
+# - include_tasks: linux-headless/zsh-setup.yml
+- include_tasks: general/npm-packages.yml
+# - include_tasks: general/oh-my-zsh.yml
+- include_tasks: general/rust.yml

@@ -1,0 +1,23 @@
+# - name: Load variables for the target system
+#   # ansible.builtin.include_vars: "{{ item }}"
+#   with_first_found:
+#     - "os/{{ ansible_distribution }}/{{ ansible_distribution_release }}.yml"
+#     - "os/{{ ansible_distribution }}.yml"
+#     - "os/{{ ansible_os_family }}_{{ ansible_architecture }}.yml"
+#     - "os/{{ ansible_os_family }}.yml"
+#     - "os/default.yml"
+
+- hosts: localhost
+  vars:
+    nodejs_version: 14.20.0
+  
+  tasks:
+  - name: Setup on Linux
+    include_tasks: local-linux-headless.yml
+    when: "ansible_system == 'Linux'"
+
+  - name: Setup on macOS
+    include_tasks: local-mac.yml
+    when: "ansible_os_family == 'Darwin'"
+
+# - import_tasks: setup.yml
