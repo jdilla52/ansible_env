@@ -1,0 +1,51 @@
+- name: Installing Homebrew Packages
+  homebrew:
+    name:
+      - autoconf
+      - awscli
+      - bash-completion
+      - boot2docker
+      - consul
+      - clang-format
+      - cmake
+      - docker-compose
+      - docker-machine
+      - doxygen
+      - git
+      - git-lfs
+      - go
+      - jq
+      - k9s
+      - nmap
+      - nomad
+      - openssl
+      - packer
+      - pyenv
+      - python
+      - rbenv
+      - ruby-build
+      - ssh-copy-id
+      - terraform
+      - tmux
+      - tree
+      - vault
+      - wget
+      - zsh
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+    state: present
+  register: result
+  until: result is successful
+
+- name: Installing Homebrew Cask Packages
+  homebrew_cask:
+    name:
+#      - docker
+#      - clion
+      - iterm2
+      - jetbrains-toolbox
+      - spotify
+#      - visual-studio-code
+    state: present
+  register: result
+  until: result is successful

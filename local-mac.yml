@@ -19,8 +19,10 @@
 #       - install_homebrew_if_missing
 # tasks:
 # - include: tasks/ssh.yml
-- include_tasks: mac/hombrew.yml
+#- include_tasks: mac/hombrew.yml
 - include_tasks: general/git-setup.yml
+- include_tasks: mac/node-setup.yml
+- include_tasks: mac/brew_misc.yml
 # - include_tasks: linux-headless/core-setup.yml
 # - include_tasks: linux-headless/dotfiles.yml
 # - include_tasks: linux-headless/node-setup.yml
