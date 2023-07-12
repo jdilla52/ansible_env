@@ -14,8 +14,12 @@
       - git
       - git-lfs
       - go
+      - helm
       - jq
       - k9s
+      - kubectl
+      - kubectx
+      - minikube
       - nmap
       - nomad
       - openssl
@@ -23,6 +27,7 @@
       - pyenv
       - python
       - rbenv
+      - ruby
       - ruby-build
       - ssh-copy-id
       - terraform
